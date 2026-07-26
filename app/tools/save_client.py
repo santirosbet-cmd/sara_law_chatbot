@@ -14,13 +14,15 @@ async def execute(client_id: str, args: Dict[str, Any]) -> Dict[str, str]:
         updates["first_name"] = args["first_name"]
     if args.get("last_name"):
         updates["last_name"] = args["last_name"]
+    if args.get("email"):
+        updates["email"] = args["email"]
     if args.get("phone"):
         updates["phone"] = args["phone"]
 
     if args.get("intake_type"):
         metadata["intake_type"] = args["intake_type"]
     if args.get("situation_summary"):
-        metadata["situation_summary"] = args["situation_summary"]
+        metadata["situation"] = args["situation_summary"]
     if args.get("urgency"):
         metadata["urgency"] = args["urgency"]
     if args.get("notes"):
