@@ -11,24 +11,34 @@ TOOLS = [
             "name": "save_client_info",
             "description": (
                 "Save or update client information to the database. Call this silently "
-                "when the client provides their name, phone, or other personal details "
-                "during the conversation."
+                "when the client provides their name, phone, email, or other personal details "
+                "during the conversation. Also call to record intake type, situation summary, "
+                "and urgency once those are known."
             ),
             "parameters": {
                 "type": "object",
                 "properties": {
                     "first_name": {"type": "string", "description": "Client's first name"},
                     "last_name": {"type": "string", "description": "Client's last name"},
+                    "email": {"type": "string", "description": "Client's real email address (captured during chat)"},
                     "phone": {"type": "string", "description": "Client's phone number"},
-                    "company_name": {"type": "string", "description": "Client's company (for commercial litigation)"},
+                    "intake_type": {
+                        "type": "string",
+                        "enum": ["Personal Injury", "Criminal Defense"],
+                        "description": "Practice area for this intake",
+                    },
                     "situation_summary": {
                         "type": "string",
                         "description": "Brief summary of the client's situation or case",
                     },
                     "urgency": {
                         "type": "string",
-                        "enum": ["low", "medium", "high", "urgent"],
-                        "description": "How urgent is this matter",
+                        "enum": ["Low", "Normal", "High", "Urgent"],
+                        "description": "How urgent is this matter — use Urgent for active criminal cases or emergency injuries",
+                    },
+                    "notes": {
+                        "type": "string",
+                        "description": "Any additional notes about the client's situation",
                     },
                 },
             },
@@ -73,7 +83,7 @@ TOOLS = [
                 "properties": {
                     "title": {
                         "type": "string",
-                        "description": "Brief title for the case (e.g., 'H-1B Visa Application', 'Contract Dispute with Acme Corp')",
+                        "description": "Brief title for the case (e.g., 'Car Accident on I-10', 'DWI Charge in Harris County')",
                     },
                     "description": {
                         "type": "string",
