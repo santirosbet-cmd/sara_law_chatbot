@@ -15,7 +15,7 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     conversation_id: Optional[str] = None
-    client_email: str
+        client_email: Optional[str] = None
     message: str
     practice_area: str = "roque_law"
     # Client-side full history — the widget is the source of truth for memory,
